@@ -1,0 +1,19 @@
+# DATABASE
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/blogsDB
+    username: postgres
+    password: passadmin
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database: postgresql
+    generate-ddl: true # Spring Boot will generate the necessary DDL scripts to create or update the database schema during application startup.
+    database-platform: org.hibernate.dialect.PostgreSQLDialect #ensure that Hibernate generates the appropriate SQL statements and uses the correct syntax for PostgreSQL
+server:
+  port: 7777
+logging:
+  level:
+    org.springframework.security.web: DEBUG
