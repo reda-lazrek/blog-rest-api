@@ -9,6 +9,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/apiblog/users")
 public class UserController {
 
-    @Autowired
-    UserServiceImpl userService;
+    
 }
