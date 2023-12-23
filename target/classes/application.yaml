@@ -7,13 +7,17 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: true
     database: postgresql
     generate-ddl: true # Spring Boot will generate the necessary DDL scripts to create or update the database schema during application startup.
     database-platform: org.hibernate.dialect.PostgreSQLDialect #ensure that Hibernate generates the appropriate SQL statements and uses the correct syntax for PostgreSQL
+#  sql:
+#    init:
+#      mode: always
 server:
   port: 7777
 logging:
   level:
     org.springframework.security.web: DEBUG
+

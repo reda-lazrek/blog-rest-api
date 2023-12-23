@@ -6,6 +6,7 @@ import com.rean.blogrest.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,8 +15,10 @@ public class ArticleServiceImpl implements ArticleService{
 
     @Autowired
     ArticleRepository articleRepository;
+
     @Override
     public Article createArticle(Article article) {
+        article.setPublication_date(LocalDateTime.now());
         return articleRepository.save(article);
     }
 
