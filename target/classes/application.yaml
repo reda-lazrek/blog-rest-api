@@ -2,8 +2,8 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/blogsDB
-    username: postgres
-    password: passadmin
+    username: openpg
+    password: openpgpwd
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

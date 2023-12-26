@@ -1,7 +1,12 @@
 package com.rean.blogrest.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,6 +14,8 @@ import java.util.Set;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "articles")
 public class Article {
 
@@ -25,11 +32,14 @@ public class Article {
     @Column(nullable = false,updatable = false)
     private LocalDateTime publication_date;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "article")
+    @JsonManagedReference
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "article")
     private List<Comment> comments;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
+
 
     @ManyToMany
     @JoinTable(
