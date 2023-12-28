@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -41,19 +42,22 @@ public class Article {
     private User user;
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
+
+    @JsonManagedReference
     @JoinTable(
             name = "article_category",
             joinColumns = @JoinColumn(name = "article_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    private Set<Category> categories;
+    private List<Category> categories;
 
     @ManyToMany
+    @JsonBackReference
     @JoinTable(
             name = "article_tag",
             joinColumns = @JoinColumn(name = "article_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
-    private Set<Tag> tags;
+    private List<Tag> tags;
 }

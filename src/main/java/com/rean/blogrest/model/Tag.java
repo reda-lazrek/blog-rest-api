@@ -2,6 +2,7 @@ package com.rean.blogrest.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class Tag {
     @Column(length = 50, nullable = false)
     private String name;
 
+    @JsonManagedReference
     @ManyToMany(mappedBy = "tags")
     private Set<Article> articles;
 }

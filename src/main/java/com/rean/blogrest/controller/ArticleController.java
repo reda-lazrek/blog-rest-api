@@ -32,7 +32,7 @@ public class ArticleController {
     }
 
     @GetMapping("/{id}/categories")
-    public Set<Category> getArticleCategories(@PathVariable Long id){
+    public List<Category> getArticleCategories(@PathVariable Long id){
         Article article = articleService.getArticleById(id);
         return article.getCategories();
     }

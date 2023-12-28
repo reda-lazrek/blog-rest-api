@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -62,23 +63,23 @@ public class DataInitializer implements ApplicationRunner {
 
 
 
-        Set<Category> article1Categories = new HashSet<>();
+        List<Category> article1Categories = new ArrayList<>();
         article1Categories.add(category1);
         article1Categories.add(category3);
 
-        Set<Category> article2Categories = new HashSet<>();
+        List<Category> article2Categories = new ArrayList<>();
         article2Categories.add(category6);
         article2Categories.add(category5);
 
-        Set<Category> article3Categories = new HashSet<>();
+        List<Category> article3Categories = new ArrayList<>();
         article3Categories.add(category4);
         article3Categories.add(category3);
 
-        Set<Tag> article1Tags = new HashSet<>();
+        List<Tag> article1Tags = new ArrayList<>();
         article1Tags.add(tag1);
-        Set<Tag> article2Tags = new HashSet<>();
+        List<Tag> article2Tags = new ArrayList<>();
         article2Tags.add(tag3);
-        Set<Tag> article3Tags = new HashSet<>();
+        List<Tag> article3Tags = new ArrayList<>();
         article3Tags.add(tag2);
 
         tagRepository.saveAll(List.of(tag1,tag2,tag3));

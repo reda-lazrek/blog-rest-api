@@ -27,7 +27,7 @@ public class Comment {
     private LocalDateTime date;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Article article;
 
 }
