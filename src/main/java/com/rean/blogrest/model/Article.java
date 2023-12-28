@@ -43,7 +43,6 @@ public class Article {
 
 
     @ManyToMany(fetch = FetchType.EAGER)
-
     @JsonManagedReference
     @JoinTable(
             name = "article_category",
@@ -53,7 +52,7 @@ public class Article {
     private List<Category> categories;
 
     @ManyToMany
-    @JsonBackReference
+    @JsonManagedReference
     @JoinTable(
             name = "article_tag",
             joinColumns = @JoinColumn(name = "article_id"),

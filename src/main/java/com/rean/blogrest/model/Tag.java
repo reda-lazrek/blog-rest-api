@@ -24,7 +24,7 @@ public class Tag {
     @Column(length = 50, nullable = false)
     private String name;
 
-    @JsonManagedReference
+    @JsonBackReference
     @ManyToMany(mappedBy = "tags")
     private Set<Article> articles;
 }
