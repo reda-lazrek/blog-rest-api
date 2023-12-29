@@ -37,6 +37,16 @@ public class ArticleController {
         return article.getCategories();
     }
 
+    @GetMapping("/findByCategorie")
+    public List<Article> getAllArticlesByCategoryName(@RequestParam(value = "categoryName") String categoryName){
+        return articleService.getAllArticlesByCategoryName(categoryName);
+    }
+
+    @GetMapping("/findByTag")
+    public List<Article> getAllArticlesByTagName(@RequestParam(value = "tagName") String tagName){
+        return articleService.getAllArticlesByTagName(tagName);
+    }
+
     @PostMapping("/create")
     public Article createArticle(@RequestBody Article article){
         return articleService.createArticle(article);

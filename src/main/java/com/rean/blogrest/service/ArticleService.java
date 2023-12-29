@@ -10,4 +10,6 @@ public interface ArticleService{
     List<Article> getAllArticles();
     Article getArticleById(Long id);
     void deleteArticle(Long id);
+    List<Article> getAllArticlesByCategoryName(String categoryName);
+    List<Article> getAllArticlesByTagName(String tagName);
 }

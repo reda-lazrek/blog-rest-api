@@ -118,6 +118,5 @@ public class DataInitializer implements ApplicationRunner {
         Comment comment3 = new Comment(0L,"Quo adipisci iure ex quis illo et voluptate dolor non molestias quaerat.",LocalDateTime.now(),article3);
 
         commentRepository.saveAll(List.of(comment1,comment2,comment3));
-
     }
 }

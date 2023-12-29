@@ -44,4 +44,14 @@ public class ArticleServiceImpl implements ArticleService{
     public void deleteArticle(Long id) {
         articleRepository.deleteById(id);
     }
+
+    @Override
+    public List<Article> getAllArticlesByCategoryName(String categoryName) {
+        return articleRepository.findByCategories_NameContaining(categoryName);
+    }
+
+    @Override
+    public List<Article> getAllArticlesByTagName(String tagName) {
+        return articleRepository.findByTags_NameStartingWith(tagName);
+    }
 }

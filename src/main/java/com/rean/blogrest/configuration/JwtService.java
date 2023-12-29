@@ -20,7 +20,7 @@ public class JwtService {
 
     // 256-bit secret random key
     private static final String SECRET_KEY = "873f3eaa8a649dc13cf283cc02f102626b26150fd09daeba1eed5353d9a0e599";
-    private static final Long EXPIRATION_DATE = 3600000L; //expires after 1 hour (in milliseconds)
+    private static final Long EXPIRATION_DATE = 86400000L; //expires after 24 hour (in milliseconds)
 
     public String getUserNameFromJWT(String token) {
         return extractAllClaims(token).getSubject();
