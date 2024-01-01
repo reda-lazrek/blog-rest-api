@@ -1,5 +1,6 @@
 package com.rean.blogrest.controller;
 
+import com.rean.blogrest.dto.AddCommentRequest;
 import com.rean.blogrest.model.Category;
 import com.rean.blogrest.model.Comment;
 import com.rean.blogrest.service.CommentServiceImpl;
@@ -16,27 +17,27 @@ public class CommentController {
     CommentServiceImpl commentService;
 
     @GetMapping("/list")
-    public List<Comment> getAllCategories(){
+    public List<Comment> getAllComments(){
         return commentService.getAllComments();
     }
 
     @GetMapping("/{id}")
-    public Comment getCategoryById(@PathVariable Long id){
+    public Comment getCommentById(@PathVariable Long id){
         return commentService.getCommentById(id);
     }
 
     @PostMapping("/create")
-    public Comment createCategory(@RequestBody Comment category){
-        return commentService.createComment(category);
+    public void createCategory(@RequestBody AddCommentRequest comment){
+        commentService.createComment(comment);
     }
 
     @PutMapping("/update/{id}")
-    public Comment updateCategory(@PathVariable Long id, @RequestBody Comment newComment){
+    public Comment updateComment(@PathVariable Long id, @RequestBody Comment newComment){
         return commentService.updateComment(id,newComment);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteCategory(@PathVariable Long id){
+    public void deleteComment(@PathVariable Long id){
         commentService.deleteComment(id);
     }
 }

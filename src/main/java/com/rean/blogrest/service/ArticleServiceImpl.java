@@ -45,8 +45,15 @@ public class ArticleServiceImpl implements ArticleService{
         }
 
         for (String tagLabel: articleRequest.getTagLabels()){
-            Tag tag = tagRepository.findByName(tagLabel).get();
-            if (tag != null) articleTags.add(tag);
+             Optional<Tag> tag = tagRepository.findByName(tagLabel);
+            if (tag.isPresent()) articleTags.add(tag.get());
+            else{
+                Tag newTag = new Tag();
+                newTag.setName(tagLabel);
+                newTag.setArticles(null);
+                articleTags.add(newTag);
+                tagRepository.save(newTag);
+            }
         }
 
         article.setTitle(articleRequest.getTitle());
