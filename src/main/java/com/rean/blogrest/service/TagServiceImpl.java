@@ -1,5 +1,6 @@
 package com.rean.blogrest.service;
 
+import com.rean.blogrest.dto.AddTagRequest;
 import com.rean.blogrest.exception.NotFoundException;
 import com.rean.blogrest.model.Comment;
 import com.rean.blogrest.model.Tag;
@@ -17,8 +18,11 @@ public class TagServiceImpl implements TagService{
     TagRepository tagRepository;
 
     @Override
-    public Tag createTag(Tag tag) {
-        return tagRepository.save(tag);
+    public void createTag(AddTagRequest tagRequest) {
+        Tag tag = new Tag();
+        tag.setName(tagRequest.getName());
+        tag.setArticles(null);
+        tagRepository.save(tag);
     }
 
     @Override

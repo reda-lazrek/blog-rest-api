@@ -1,5 +1,6 @@
 package com.rean.blogrest.controller;
 
+import com.rean.blogrest.dto.AddTagRequest;
 import com.rean.blogrest.model.Category;
 import com.rean.blogrest.model.Tag;
 import com.rean.blogrest.service.CategoryServiceImpl;
@@ -27,8 +28,8 @@ public class TagController {
     }
 
     @PostMapping("/create")
-    public Tag createTag(@RequestBody Tag tag){
-        return tagService.createTag(tag);
+    public void createTag(@RequestBody AddTagRequest tag){
+        tagService.createTag(tag);
     }
 
     @PutMapping("/update/{id}")

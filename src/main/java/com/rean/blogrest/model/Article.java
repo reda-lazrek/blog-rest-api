@@ -37,7 +37,8 @@ public class Article {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "article")
     private List<Comment> comments;
 
-    @JsonBackReference
+
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 

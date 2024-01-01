@@ -1,11 +1,12 @@
 package com.rean.blogrest.service;
 
+import com.rean.blogrest.dto.AddArticleRequest;
 import com.rean.blogrest.model.Article;
 
 import java.util.List;
 
 public interface ArticleService{
-    Article createArticle(Article article);
+    void createArticle(AddArticleRequest articleRequest);
     Article updateArticle(Long id,Article newArticle);
     List<Article> getAllArticles();
     Article getArticleById(Long id);

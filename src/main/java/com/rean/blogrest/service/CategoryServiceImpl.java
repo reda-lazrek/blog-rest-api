@@ -1,5 +1,6 @@
 package com.rean.blogrest.service;
 
+import com.rean.blogrest.dto.AddCategoryRequest;
 import com.rean.blogrest.exception.NotFoundException;
 import com.rean.blogrest.model.Article;
 import com.rean.blogrest.model.Category;
@@ -19,8 +20,12 @@ public class CategoryServiceImpl implements CategoryService{
     CategoryRepository categoryRepository;
 
     @Override
-    public Category createCategory(Category category) {
-        return categoryRepository.save(category);
+    public void createCategory(AddCategoryRequest categoryRequest) {
+        Category category = new Category();
+        category.setName(categoryRequest.getName());
+        category.setDescription(categoryRequest.getDescription());
+        category.setArticles(null);
+        categoryRepository.save(category);
     }
 
     @Override

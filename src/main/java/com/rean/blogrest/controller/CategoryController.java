@@ -1,5 +1,6 @@
 package com.rean.blogrest.controller;
 
+import com.rean.blogrest.dto.AddCategoryRequest;
 import com.rean.blogrest.model.Article;
 import com.rean.blogrest.model.Category;
 
@@ -27,8 +28,8 @@ public class CategoryController {
     }
 
     @PostMapping("/create")
-    public Category createCategory(@RequestBody Category category){
-        return categoryService.createCategory(category);
+    public void createCategory(@RequestBody AddCategoryRequest category){
+        categoryService.createCategory(category);
     }
 
     @PutMapping("/update/{id}")

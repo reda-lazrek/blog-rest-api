@@ -1,5 +1,6 @@
 package com.rean.blogrest.controller;
 
+import com.rean.blogrest.dto.AddArticleRequest;
 import com.rean.blogrest.model.*;
 import com.rean.blogrest.service.ArticleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +49,8 @@ public class ArticleController {
     }
 
     @PostMapping("/create")
-    public Article createArticle(@RequestBody Article article){
-        return articleService.createArticle(article);
+    public void createArticle(@RequestBody AddArticleRequest article){
+         articleService.createArticle(article);
     }
 
     @PutMapping("/update/{id}")

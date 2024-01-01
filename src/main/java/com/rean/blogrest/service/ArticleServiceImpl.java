@@ -1,12 +1,19 @@
 package com.rean.blogrest.service;
 
+import com.rean.blogrest.dto.AddArticleRequest;
 import com.rean.blogrest.exception.NotFoundException;
 import com.rean.blogrest.model.Article;
+import com.rean.blogrest.model.Category;
+import com.rean.blogrest.model.Tag;
 import com.rean.blogrest.repository.ArticleRepository;
+import com.rean.blogrest.repository.CategoryRepository;
+import com.rean.blogrest.repository.TagRepository;
+import com.rean.blogrest.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,10 +23,39 @@ public class ArticleServiceImpl implements ArticleService{
     @Autowired
     ArticleRepository articleRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    CategoryRepository categoryRepository;
+
+    @Autowired
+    TagRepository tagRepository;
+
     @Override
-    public Article createArticle(Article article) {
+    public void createArticle(AddArticleRequest articleRequest) {
+
+        Article article = new Article();
+        List<Category> articleCategories = new ArrayList<>();
+        List<Tag> articleTags = new ArrayList<>();
+
+        for (int categoryId: articleRequest.getCategoryIds()){
+            Category category = categoryRepository.findById(categoryId).get();
+            if (category!=null) articleCategories.add(category);
+        }
+
+        for (String tagLabel: articleRequest.getTagLabels()){
+            Tag tag = tagRepository.findByName(tagLabel).get();
+            if (tag != null) articleTags.add(tag);
+        }
+
+        article.setTitle(articleRequest.getTitle());
+        article.setContent(articleRequest.getContent());
+        article.setCategories(articleCategories);
+        article.setTags(articleTags);
+        article.setUser(userRepository.findById(articleRequest.getUserId()).get());
         article.setPublication_date(LocalDateTime.now());
-        return articleRepository.save(article);
+        articleRepository.save(article);
     }
 
     @Override
