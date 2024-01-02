@@ -1,6 +1,5 @@
 package com.rean.blogrest.dto;
 
-import com.rean.blogrest.model.Article;
 
 import lombok.Data;
 

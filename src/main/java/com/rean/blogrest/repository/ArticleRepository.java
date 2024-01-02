@@ -13,4 +13,6 @@ public interface ArticleRepository extends JpaRepository<Article,Long> {
     List<Article> findByCategories_NameContaining(String categoryName);
 
     List<Article> findByTags_NameStartingWith(String tagName);
+
+    List<Article> findAllByOrderByIdDesc();
 }

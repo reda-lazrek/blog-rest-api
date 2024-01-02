@@ -5,11 +5,9 @@ import com.rean.blogrest.exception.NotFoundException;
 import com.rean.blogrest.model.Article;
 import com.rean.blogrest.model.Category;
 import com.rean.blogrest.model.Tag;
-import com.rean.blogrest.repository.ArticleRepository;
-import com.rean.blogrest.repository.CategoryRepository;
-import com.rean.blogrest.repository.TagRepository;
-import com.rean.blogrest.repository.UserRepository;
+import com.rean.blogrest.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -32,6 +30,9 @@ public class ArticleServiceImpl implements ArticleService{
     @Autowired
     TagRepository tagRepository;
 
+    @Autowired
+    CommentRepository commentRepository;
+
     @Override
     public void createArticle(AddArticleRequest articleRequest) {
 
@@ -44,15 +45,19 @@ public class ArticleServiceImpl implements ArticleService{
             if (category!=null) articleCategories.add(category);
         }
 
-        for (String tagLabel: articleRequest.getTagLabels()){
-             Optional<Tag> tag = tagRepository.findByName(tagLabel);
-            if (tag.isPresent()) articleTags.add(tag.get());
-            else{
-                Tag newTag = new Tag();
-                newTag.setName(tagLabel);
-                newTag.setArticles(null);
-                articleTags.add(newTag);
-                tagRepository.save(newTag);
+        if (articleRequest.getTagLabels().isEmpty()){
+            articleTags = null;
+        }else {
+            for (String tagLabel : articleRequest.getTagLabels()) {
+                Optional<Tag> tag = tagRepository.findByName(tagLabel);
+                if (tag.isPresent()) articleTags.add(tag.get());
+                else {
+                    Tag newTag = new Tag();
+                    newTag.setName(tagLabel);
+                    newTag.setArticles(null);
+                    articleTags.add(newTag);
+                    tagRepository.save(newTag);
+                }
             }
         }
 
@@ -75,7 +80,8 @@ public class ArticleServiceImpl implements ArticleService{
 
     @Override
     public List<Article> getAllArticles() {
-        return articleRepository.findAll();
+        //return articleRepository.findAll();
+        return articleRepository.findAllByOrderByIdDesc();
     }
 
     @Override
@@ -85,6 +91,12 @@ public class ArticleServiceImpl implements ArticleService{
 
     @Override
     public void deleteArticle(Long id) {
+        Article article = articleRepository.findById(id).get();
+        if (!article.getComments().isEmpty()){ //check if this article has comments
+            for (int i = 0; i < article.getComments().size(); i++) {
+                commentRepository.deleteById(article.getComments().get(i).getId());
+            }
+        }
         articleRepository.deleteById(id);
     }
 
